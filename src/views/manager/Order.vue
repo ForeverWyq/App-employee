@@ -1,0 +1,60 @@
+<template>
+  <div class="order">
+    <van-nav-bar title="我的订单" style="paddingTop:1em"/>
+    <van-tabs v-model="active" color="#1659a0" @click="tabClickHandler">
+      <van-tab title="全部订单"></van-tab>
+      <van-tab title="待接单"></van-tab> 
+      <van-tab title="待服务"></van-tab> 
+      <van-tab title="待确认"></van-tab> 
+      <van-tab title="已完成"></van-tab>
+    </van-tabs>
+    <div>
+      <briup-order-item 
+      v-for="o in orders"
+      :key="o.id" :data="o">
+      </briup-order-item>
+    </div>
+  </div>
+</template>
+<script>
+import { mapState } from 'vuex'
+import { get } from '../../http/axios'
+export default {
+  data(){
+    return {
+      active:0,
+      orders:[],
+      status:null
+    }
+  },
+  computed:{
+    ...mapState("user",["info"])
+  },
+  created(){
+    this.loadOrders();
+  },
+  methods:{
+    // 加载我的订单
+    loadOrders(){
+      let url="/order/query";
+      let params={
+        waiterId:this.info.id,
+        status:this.status
+      }
+      get(url,params).then((response)=>{
+        this.orders=response.data;
+      })
+    },
+    // 点击tab执行的回调函数 
+    tabClickHandler(name,title){
+      this.status = title === "全部" ? null : title;
+      this.loadOrders();
+    }
+  }
+}
+</script>
+<style scoped>
+.order {
+  background: #f1f1f1;
+}
+</style>
