@@ -2,7 +2,7 @@
   <div class="order">
     <van-nav-bar title="我的订单" style="paddingTop:1em"/>
     <van-tabs v-model="active" color="#1659a0" @click="tabClickHandler">
-      <van-tab title="全部订单"></van-tab>
+      <van-tab title="全部"></van-tab>
       <van-tab title="待接单"></van-tab> 
       <van-tab title="待服务"></van-tab> 
       <van-tab title="待确认"></van-tab> 

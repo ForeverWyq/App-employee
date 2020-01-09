@@ -2,7 +2,7 @@
   <div class="user">
     <div class="header">
       <div class="photo">
-        <img src="../../assets/user.png" alt=""/>
+        <img src="../../assets/user2.png" alt=""/>
       </div>
       <div class="name">{{info.name}}</div>
     </div>

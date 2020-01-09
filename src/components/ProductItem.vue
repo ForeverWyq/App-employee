@@ -47,6 +47,7 @@ export default {
         }
         get(url,params).then(()=>{
           this.$router.push("/manager/order");
+          this.$toast("接单成功，请尽快服务");
         })
     },
     rejectHandler(id){
@@ -56,6 +57,7 @@ export default {
         }
         get(url,params).then(()=>{
           this.$router.push("/manager/order");
+          this.$toast("拒绝成功");
         })
     }
   }

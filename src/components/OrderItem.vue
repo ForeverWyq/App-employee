@@ -23,16 +23,60 @@
           {{data.address.address}}
         </div>
       </van-col>
-    </van-row>
+    </van-row><br>
     <div class="text-right">
       合计￥ {{data.total}}
+    </div>
+    
+    <div class="text-right" v-if="data.status==='待接单'"><br>
+        <van-button size="small" type="warning" plain 
+        @click="rejectHandler(data.id)">拒绝</van-button>&nbsp;
+        <van-button size="small" type="primary" plain 
+        @click="acceptHandler(data.id)">接受</van-button>
+    </div><br>
+    <div class="text-right" v-if="data.status==='待服务'"><br>
+        <van-button size="small" type="primary" plain 
+        @click="finishHandler(data.id)">完成</van-button>
     </div>
   </div>
 </template>
 <script>
+import {get} from '../http/axios';
 export default {
   props:{
     data:{type:Object}
+  },
+  methods:{
+      finishHandler(id){
+        let url = "/order/serviceCompleteOrder";
+        let params={
+          orderId:id
+        }
+        get(url,params).then(()=>{
+          this.$router.go(0);
+          this.$toast("服务完成，请等待顾客确认");
+        })
+      },
+      acceptHandler(id){
+        let url = "/order/takeOrder";
+        let params={
+          orderId:id
+        }
+        get(url,params).then(()=>{
+          this.$router.push("/manager/order");
+          this.$toast("接单成功，请尽快服务");
+        })
+      },
+      rejectHandler(id){
+        let url = "/order/rejectOrder";
+        let params={
+            orderId:id
+        }
+        get(url,params).then(()=>{
+          this.$router.go(0);
+          this.$toast("拒绝成功");
+        })
+      }
   }
 }
 </script>

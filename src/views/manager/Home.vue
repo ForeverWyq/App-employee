@@ -1,7 +1,14 @@
 <template>
   <div class="home">
+    <van-nav-bar title="主页"/>
     <header class="header">
-      <img src="../../assets/home.jpg" alt="">
+    <!-- <van-image
+      width="350"
+      height="200"
+      src="../../assets/images/home_10.jpg"
+    />     -->
+
+      <img src="../../assets/home.png" alt="">
     </header>
     <!-- 内容区域 -->
     <div>
