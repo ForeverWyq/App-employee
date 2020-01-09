@@ -53,8 +53,8 @@ export default {
           orderId:id
         }
         get(url,params).then(()=>{
-          this.$router.go(0);
           this.$toast("服务完成，请等待顾客确认");
+          this.$router.go(0);
         })
       },
       acceptHandler(id){
@@ -63,8 +63,8 @@ export default {
           orderId:id
         }
         get(url,params).then(()=>{
-          this.$router.push("/manager/order");
           this.$toast("接单成功，请尽快服务");
+          this.$router.go(0);
         })
       },
       rejectHandler(id){
@@ -73,8 +73,8 @@ export default {
             orderId:id
         }
         get(url,params).then(()=>{
-          this.$router.go(0);
           this.$toast("拒绝成功");
+          this.$router.go(0);
         })
       }
   }
